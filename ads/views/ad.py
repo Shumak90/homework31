@@ -1,7 +1,9 @@
 from django.db.models import Q
 from rest_framework.generics import ListAPIView, RetrieveAPIView, DestroyAPIView, CreateAPIView, UpdateAPIView
+from rest_framework.permissions import IsAuthenticated
 
 from ads.models import Ad
+from ads.permissions.ad import AdCreatePermission
 from ads.serializers.ad import AdSerializer, AdCreateSerializer, AdUpdateSerializer, AdImageSerializer
 
 
@@ -52,6 +54,7 @@ class AdListView(ListAPIView):
 class AdDetailView(RetrieveAPIView):
     queryset = Ad.objects.all()
     serializer_class = AdSerializer
+    permission_classes = [IsAuthenticated]
 
 
 class AdCreateView(CreateAPIView):
@@ -62,13 +65,16 @@ class AdCreateView(CreateAPIView):
 class AdUpdateView(UpdateAPIView):
     queryset = Ad.objects.all()
     serializer_class = AdUpdateSerializer
+    permission_classes = [IsAuthenticated, AdCreatePermission]
 
 
 class AdImageView(UpdateAPIView):
     queryset = Ad.objects.all()
     serializer_class = AdImageSerializer
+    permission_classes = [IsAuthenticated, AdCreatePermission]
 
 
 class AdDeleteView(DestroyAPIView):
     queryset = Ad.objects.all()
     serializer_class = AdSerializer
+    permission_classes = [IsAuthenticated, AdCreatePermission]

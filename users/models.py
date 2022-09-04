@@ -1,13 +1,17 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 from ads.models.location import Location
 
 
-class User(models.Model):
+class User(AbstractUser):
+    ADMIN = "admin"
+    MEMBER = "member"
+    MODERATOR = "moderator"
     ROLES = [
-        ('admin', 'администратор'),
-        ('member', 'пользователь'),
-        ('moderator', 'модератор')
+        (ADMIN, 'администратор'),
+        (MEMBER, 'пользователь'),
+        (MODERATOR, 'модератор')
     ]
 
     first_name = models.CharField(max_length=100, null=True)
