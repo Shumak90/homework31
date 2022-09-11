@@ -7,8 +7,8 @@ def test_ad_create(client, user, category):
     expected_response = {
         "id": user.id,
         "image": None,
-        "name": "Test 10 characters minimum",
-        "price": 2500,
+        "name": "Test123456",
+        "price": 1234,
         "author": user.username,
         "category": category.name,
         "is_published": False,
@@ -17,8 +17,8 @@ def test_ad_create(client, user, category):
 
     data = {
         "author_id": user.id,
-        "name": "Test 10 characters minimum",
-        "price": 2500,
+        "name": "Test123456",
+        "price": 1234,
         "description": "Test description",
         "is_published": False,
         "category_id": category.id
